@@ -40,7 +40,7 @@ fun GameScreen(navController: NavController, mode: String, name: String) {
     val context = LocalContext.current
     val limit = 60
     var tasks by remember { mutableIntStateOf(1) }
-    var hint by remember { mutableStateOf(Game().getRandom(mode)) }
+    var hint by remember { mutableStateOf(Game().getRandom(1..50)) }
     val time = remember { mutableIntStateOf(limit) }
     var score by remember { mutableIntStateOf(0) }
 
@@ -127,17 +127,16 @@ fun GameScreen(navController: NavController, mode: String, name: String) {
                         .height(70.dp)
                         .width(70.dp),
                     onClick = {
-                        if (hint.second == "*") {
+                        if ("$first".toInt()*"$second".toInt() == "$correct_answer") {
                             score++
                         } else {
                             score--
                         }
-                        hint = Game().getRandom(mode)
                         tasks++
                     },
                 ) {
                     Text(
-                        text = "*",
+                        text = correct_answer,
                         fontSize = 25.sp,
                         fontWeight = FontWeight.Bold,
                     )
@@ -147,17 +146,17 @@ fun GameScreen(navController: NavController, mode: String, name: String) {
                         .height(70.dp)
                         .width(70.dp),
                     onClick = {
-                        if (hint.second == "/") {
+                        if (hint == correct_answer) {
                             score++
                         } else {
                             score--
                         }
-                        hint = Game().getRandom(mode)
+                        hint = Game().getRandom(1..50)
                         tasks++
                     },
                 ) {
                     Text(
-                        text = "/",
+                        text = hint,
                         fontSize = 25.sp,
                         fontWeight = FontWeight.Bold,
                     )
@@ -167,17 +166,17 @@ fun GameScreen(navController: NavController, mode: String, name: String) {
                         .height(70.dp)
                         .width(70.dp),
                     onClick = {
-                        if (hint.second == "+") {
+                        if (hint == correct_answer) {
                             score++
                         } else {
                             score--
                         }
-                        hint = Game().getRandom(mode)
+                        hint = Game().getRandom(1..50)
                         tasks++
                     },
                 ) {
                     Text(
-                        text = "+",
+                        text = hint,
                         fontSize = 25.sp,
                         fontWeight = FontWeight.Bold,
                     )
@@ -187,17 +186,17 @@ fun GameScreen(navController: NavController, mode: String, name: String) {
                         .height(70.dp)
                         .width(70.dp),
                     onClick = {
-                        if (hint.second == "-") {
+                        if (hint == correct_answer) {
                             score++
                         } else {
                             score--
                         }
-                        hint = Game().getRandom(mode)
+                        hint = Game().getRandom(1..50)
                         tasks++
                     },
                 ) {
                     Text(
-                        text = "-",
+                        text = hint,
                         fontSize = 25.sp,
                         fontWeight = FontWeight.Bold,
                     )
